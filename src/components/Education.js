@@ -26,7 +26,7 @@ function Education() {
     },
     {
       school: "Hindustan International School, Karapakkam",
-      degree: "Indian Certificate of Secondary Education Class 12",
+      degree: "The Central Board of Secondary Education (CBSE) Class 12",
       period: "May 2022"
     }
   ];
