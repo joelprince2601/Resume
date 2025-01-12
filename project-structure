@@ -1,0 +1,19 @@
+resume-website/
+├── node_modules/
+├── public/
+│   ├── index.html
+│   ├── manifest.json
+│   └── favicon.ico
+├── src/
+│   ├── components/
+│   │   ├── Header.js
+│   │   ├── About.js
+│   │   ├── Education.js
+│   │   ├── Experience.js
+│   │   ├── Projects.js
+│   │   ├── Skills.js
+│   │   └── Contact.js
+│   ├── App.js
+│   └── index.js
+├── package.json
+└── package-lock.json 
