@@ -11,7 +11,7 @@ import Contact from './components/Contact';
 import './styles/transitions.css';
 import './styles/animations.css';
 import ParticleBackground from './components/ParticleBackground';
-import { animate, createScope, createSpring, stagger } from './utils/anime';
+import { animate, createScope, createSpring, stagger } from './utils/anime.js';
 
 const theme = createTheme({
   palette: {
