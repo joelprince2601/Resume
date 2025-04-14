@@ -114,7 +114,15 @@ function Header() {
   ];
 
   return (
-    <AppBar position="sticky" sx={{ transition: 'background-color 0.3s ease' }}>
+    <AppBar 
+      position="fixed" 
+      sx={{ 
+        transition: 'background-color 0.3s ease',
+        zIndex: 1100,
+        backdropFilter: 'blur(8px)',
+        backgroundColor: 'rgba(26, 26, 26, 0.95)',
+      }}
+    >
       <Toolbar sx={{ px: { xs: 2, sm: 4 } }}>
         <Box sx={{ 
           display: 'flex', 
