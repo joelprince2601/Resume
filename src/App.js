@@ -296,6 +296,7 @@ function AppContent() {
           backgroundSize: '20px 20px',
           backgroundPosition: '-2px -2px',
           opacity: 0,
+          pointerEvents: 'none',
         }}
       />
       <Box
@@ -307,6 +308,7 @@ function AppContent() {
           right: 0,
           bottom: 0,
           opacity: 0,
+          pointerEvents: 'none',
         }}
       >
         <ParticleBackground />
@@ -316,19 +318,14 @@ function AppContent() {
         component="main"
         sx={{ 
           position: 'relative',
-          overflowY: 'auto',
-          overflowX: 'hidden',
-          height: 'calc(100vh - 64px)',
           scrollBehavior: 'smooth',
-          scrollbarWidth: 'thin',
-          scrollbarColor: '#9c27b0 #1e1e1e',
-          '&::-webkit-scrollbar': {
+          '& *::-webkit-scrollbar': {
             width: '8px',
           },
-          '&::-webkit-scrollbar-track': {
+          '& *::-webkit-scrollbar-track': {
             background: '#1e1e1e',
           },
-          '&::-webkit-scrollbar-thumb': {
+          '& *::-webkit-scrollbar-thumb': {
             background: '#9c27b0',
             borderRadius: '4px',
             '&:hover': {
