@@ -11,7 +11,60 @@ import Contact from './components/Contact';
 import './styles/transitions.css';
 import './styles/animations.css';
 import ParticleBackground from './components/ParticleBackground';
-import { animate, createScope, createSpring, stagger } from './utils/anime.js';
+import anime from 'animejs';
+
+// Animation utilities
+const animate = (targets, options) => {
+  return anime({
+    targets,
+    ...options,
+  });
+};
+
+const createSpring = ({ 
+  stiffness = 100, 
+  damping = 10, 
+  mass = 1 
+} = {}) => {
+  return (t) => {
+    const omega = Math.sqrt(stiffness / mass);
+    const zeta = damping / (2 * Math.sqrt(stiffness * mass));
+    if (zeta < 1) {
+      const omega_d = omega * Math.sqrt(1 - zeta * zeta);
+      return 1 - (Math.exp(-zeta * omega * t) * 
+        (Math.cos(omega_d * t) + (zeta * omega / omega_d) * Math.sin(omega_d * t)));
+    }
+    return 1;
+  };
+};
+
+const createScope = (options) => {
+  const animations = [];
+  const methods = {};
+
+  const add = (callback, fn) => {
+    if (typeof callback === 'string' && fn) {
+      methods[callback] = fn;
+    } else if (typeof callback === 'function') {
+      callback({ animate, timeline: anime.timeline, add });
+    }
+    return scope;
+  };
+
+  const revert = () => {
+    animations.forEach(anim => anim.pause());
+    animations.length = 0;
+  };
+
+  const scope = {
+    add,
+    revert,
+    methods,
+    animations
+  };
+
+  return scope;
+};
 
 const theme = createTheme({
   palette: {
@@ -108,7 +161,7 @@ const SectionContainer = ({ id, children }) => {
         opacity: [0, 1],
         translateY: [20, 0],
         duration: 800,
-        delay: stagger(100, { start: 500 }),
+        delay: anime.stagger(100, { start: 500 }),
         easing: 'easeOutCubic'
       });
 
