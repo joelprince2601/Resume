@@ -47,6 +47,70 @@ function Projects() {
       ]
     },
     {
+      title: "Blockchain Visualizer",
+      description: "A robust blockchain implementation with real-time visualization, transaction analysis, and network health metrics.",
+      tech: ["Blockchain", "JavaScript", "Data Visualization"],
+      image: "url_to_blockchain_image",
+      github: "https://github.com/joelprince2601/Blockchain-Visualizer",
+      features: [
+        "Real-time blockchain visualization",
+        "Transaction analytics",
+        "Network monitoring and health metrics"
+      ]
+    },
+    {
+      title: "Reinforcement Learning Cloud",
+      description: "AI-driven reinforcement learning system for optimizing cloud security, resource management, and performance.",
+      tech: ["Python", "Streamlit", "Reinforcement Learning", "Cloud"],
+      image: "url_to_rlcloud_image",
+      github: "https://github.com/joelprince2601/Reinforcement-Learning-Cloud",
+      features: [
+        "Cloud resource optimization using RL",
+        "Security enhancement via AI agents",
+        "Scalable cloud performance monitoring",
+        "Live demo: jpcloud-rl.streamlit.app"
+      ]
+    },
+    {
+      title: "AML Detection",
+      description: "Transaction analysis system that detects anomalies in sender, recipient, or transaction details using uploaded Excel data.",
+      tech: ["Python", "Pandas", "Streamlit", "Excel"],
+      image: "url_to_aml_image",
+      github: "https://github.com/joelprince2601/AML_Detection",
+      features: [
+        "Excel-based transaction data analysis",
+        "Suspicious activity detection",
+        "Upload or use sample datasets",
+        "User-friendly web interface"
+      ]
+    },
+    {
+      title: "Gesture Controller",
+      description: "Adaptive hand gesture recognition system that enables individuals with mobility limitations to control their computers.",
+      tech: ["Python", "OpenCV", "Mediapipe", "Machine Learning"],
+      image: "url_to_gesture_image",
+      github: "https://github.com/joelprince2601/GestureController",
+      features: [
+        "Custom gesture recognition",
+        "Hands-free computer control",
+        "Accessibility-focused design",
+        "Real-time camera input processing"
+      ]
+    },
+    {
+      title: "MarketAnalyzerX",
+      description: "Financial analytics platform offering technical indicators, ML models, and real-time news sentiment for Indian equity markets.",
+      tech: ["Python", "Streamlit", "Machine Learning", "Finance APIs"],
+      image: "url_to_market_image",
+      github: "https://github.com/joelprince2601/MarketAnalyzerX",
+      features: [
+        "Technical indicators & charting tools",
+        "ML-powered trading signal generation",
+        "Live news sentiment integration",
+        "Live demo: marketanalyzerx.streamlit.app"
+      ]
+    },    
+    {
       title: "Student Database Management",
       description: "Full-stack application for comprehensive student data management",
       tech: ["Python", "MySQL", "GUI", "Database"],
