@@ -11,16 +11,9 @@ import Contact from './components/Contact';
 import './styles/transitions.css';
 import './styles/animations.css';
 import ParticleBackground from './components/ParticleBackground';
-import animate from './utils/anime';
+import anime from 'animejs';
 
-// Animation utilities
-const animate = (targets, options) => {
-  return animate({
-    targets,
-    ...options,
-  });
-};
-
+// Spring animation helper
 const createSpring = ({ 
   stiffness = 100, 
   damping = 10, 
