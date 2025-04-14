@@ -10,7 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import { animate } from 'animejs';
+import anime from 'animejs';
 //import { Code as CodeIcon } from '@mui/icons-material';
 
 function Header() {
@@ -35,7 +35,7 @@ function Header() {
             if (activeSection !== section) {
               setActiveSection(section);
               // Animate the active indicator
-              animate({
+              anime({
                 targets: `#nav-${section}`,
                 scale: [0.5, 1],
                 opacity: [0, 1],
@@ -62,14 +62,14 @@ function Header() {
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
       
       // Animate scrolling
-      animate({
+      anime({
         targets: document.scrollingElement,
         scrollTop: offsetPosition,
         duration: 1000,
         easing: 'easeInOutQuart',
         begin: () => {
           // Animate the section entrance
-          animate({
+          anime({
             targets: `#${sectionId} > div`,
             opacity: [0, 1],
             translateY: [20, 0],
@@ -86,7 +86,7 @@ function Header() {
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
     // Animate menu opening
-    animate({
+    anime({
       targets: event.currentTarget,
       rotate: 180,
       duration: 400,
@@ -97,7 +97,7 @@ function Header() {
   const handleMenuClose = () => {
     // Animate menu closing
     if (anchorEl) {
-      animate({
+      anime({
         targets: anchorEl,
         rotate: 0,
         duration: 400,
@@ -182,7 +182,7 @@ function Header() {
               }}
               TransitionProps={{
                 onEnter: (node) => {
-                  animate({
+                  anime({
                     targets: node,
                     opacity: [0, 1],
                     translateY: [-10, 0],
