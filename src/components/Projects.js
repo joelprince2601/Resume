@@ -8,7 +8,20 @@ function Projects() {
 
   const projects = [
     {
-      title: "Stock Market Bot",
+      title: "MarketAnalyzerX",
+      description: "Financial analytics platform offering technical indicators, ML models, and real-time news sentiment for Indian equity markets.",
+      tech: ["Python", "Streamlit", "Machine Learning", "Finance APIs"],
+      image: "url_to_market_image",
+      github: "https://github.com/joelprince2601/MarketAnalyzerX",
+      features: [
+        "Technical indicators & charting tools",
+        "ML-powered trading signal generation",
+        "Live news sentiment integration",
+        "Live demo: marketanalyzerx.streamlit.app"
+      ]
+    }, 
+    {
+      title: "Stock Market Extension",
       description: "Chrome extension utilizing ML and image processing for real-time trading insights",
       tech: ["React.js", "Python", "ML", "Chrome API"],
       image: "url_to_stock_image",
@@ -18,32 +31,6 @@ function Projects() {
         "Real-time data analysis",
         "Sentiment analysis integration",
         "Advanced trading algorithms"
-      ]
-    },
-    {
-      title: "Real-Time Traffic Monitoring",
-      description: "Video processing system using YOLOv4 and DeepSort for traffic management",
-      tech: ["OpenCV", "YOLOv4", "DeepSort", "Python"],
-      image: "url_to_traffic_image",
-      github: "https://github.com/joelprince2601/",
-      features: [
-        "Object detection & tracking",
-        "Dynamic traffic control",
-        "Real-time analytics",
-        "Grid overlay system"
-      ]
-    },
-    {
-      title: "Bus Attendance System",
-      description: "FOG and Edge computing based RFID attendance tracking system",
-      tech: ["Arduino", "Raspberry Pi", "SQL", "IoT"],
-      image: "url_to_bus_image",
-      github: "https://github.com/joelprince2601/",
-      features: [
-        "Real-time RFID scanning",
-        "Edge computing implementation",
-        "Cloud data synchronization",
-        "Automated attendance tracking"
       ]
     },
     {
@@ -98,18 +85,19 @@ function Projects() {
       ]
     },
     {
-      title: "MarketAnalyzerX",
-      description: "Financial analytics platform offering technical indicators, ML models, and real-time news sentiment for Indian equity markets.",
-      tech: ["Python", "Streamlit", "Machine Learning", "Finance APIs"],
-      image: "url_to_market_image",
-      github: "https://github.com/joelprince2601/MarketAnalyzerX",
+      title: "Real-Time Traffic Monitoring",
+      description: "Video processing system using YOLOv4 and DeepSort for traffic management",
+      tech: ["OpenCV", "YOLOv4", "DeepSort", "Python"],
+      image: "url_to_traffic_image",
+      github: "https://github.com/joelprince2601/",
       features: [
-        "Technical indicators & charting tools",
-        "ML-powered trading signal generation",
-        "Live news sentiment integration",
-        "Live demo: marketanalyzerx.streamlit.app"
+        "Object detection & tracking",
+        "Dynamic traffic control",
+        "Real-time analytics",
+        "Grid overlay system"
       ]
-    },    
+    },
+       
     {
       title: "Student Database Management",
       description: "Full-stack application for comprehensive student data management",
