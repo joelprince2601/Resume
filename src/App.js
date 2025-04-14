@@ -9,8 +9,9 @@ import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import './styles/transitions.css';
+import './styles/animations.css';
 import ParticleBackground from './components/ParticleBackground';
-import { animate } from 'animejs';
+import { animate, createScope, createSpring, stagger } from './utils/anime';
 
 const theme = createTheme({
   palette: {
@@ -90,44 +91,57 @@ const theme = createTheme({
 
 const SectionContainer = ({ id, children }) => {
   useEffect(() => {
-    // Initial animation for sections
-    animate({
-      targets: `#${id}-content`,
-      opacity: [0, 1],
-      translateY: [50, 0],
-      duration: 800,
-      easing: 'easeOutCubic',
-      delay: 300
-    });
+    const scope = createScope({ root: document.querySelector(`#${id}`) });
 
-    // Create intersection observer for scroll animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animate({
-            targets: entry.target,
-            scale: [0.95, 1],
-            opacity: [0.5, 1],
-            duration: 800,
-            easing: 'easeOutCubic'
-          });
-        }
+    scope.add((scope) => {
+      // Initial fade in animation with spring physics
+      animate(`#${id}-content`, {
+        opacity: [0, 1],
+        translateY: [50, 0],
+        duration: 1000,
+        easing: createSpring({ stiffness: 100, damping: 15 }),
+        delay: 300
       });
-    }, {
-      threshold: 0.2,
-      rootMargin: '-50px'
+
+      // Animate child elements with stagger
+      animate(`#${id}-content > *`, {
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 800,
+        delay: stagger(100, { start: 500 }),
+        easing: 'easeOutCubic'
+      });
+
+      // Create intersection observer for scroll animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animate(entry.target, {
+              scale: [0.95, 1],
+              opacity: [0.5, 1],
+              duration: 800,
+              easing: createSpring({ stiffness: 200, damping: 20 })
+            });
+          }
+        });
+      }, {
+        threshold: 0.2,
+        rootMargin: '-50px'
+      });
+
+      const content = document.querySelector(`#${id}-content`);
+      if (content) {
+        observer.observe(content);
+      }
+
+      return () => {
+        if (content) {
+          observer.unobserve(content);
+        }
+      };
     });
 
-    const content = document.querySelector(`#${id}-content`);
-    if (content) {
-      observer.observe(content);
-    }
-
-    return () => {
-      if (content) {
-        observer.unobserve(content);
-      }
-    };
+    return () => scope.revert();
   }, [id]);
 
   return (
@@ -169,22 +183,34 @@ const SectionContainer = ({ id, children }) => {
 
 function AppContent() {
   useEffect(() => {
-    // Animate background grid on mount
-    animate({
-      targets: '.background-grid',
-      opacity: [0, 0.05],
-      scale: [0.9, 1],
-      duration: 1500,
-      easing: 'easeOutQuad'
+    const scope = createScope({ root: document.body });
+
+    scope.add((scope) => {
+      // Animate background grid with spring physics
+      animate('.background-grid', {
+        opacity: [0, 0.05],
+        scale: [0.9, 1],
+        duration: 1500,
+        easing: createSpring({ stiffness: 50, damping: 10 })
+      });
+
+      // Animate particle background with smooth fade
+      animate('#particle-background', {
+        opacity: [0, 1],
+        duration: 2000,
+        easing: 'easeOutQuad'
+      });
+
+      // Add hover animations for interactive elements
+      animate('.MuiPaper-root', {
+        scale: [1, 1.02],
+        duration: 400,
+        easing: createSpring({ stiffness: 300, damping: 20 }),
+        autoplay: false
+      });
     });
 
-    // Animate particle background
-    animate({
-      targets: '#particle-background',
-      opacity: [0, 1],
-      duration: 2000,
-      easing: 'easeOutQuad'
-    });
+    return () => scope.revert();
   }, []);
 
   return (
