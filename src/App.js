@@ -11,7 +11,7 @@ import Contact from './components/Contact';
 import './styles/transitions.css';
 import './styles/animations.css';
 import ParticleBackground from './components/ParticleBackground';
-import anime from './utils/anime';
+import anime from 'animejs';
 
 // Spring animation helper
 const createSpring = ({ 
@@ -196,7 +196,8 @@ const SectionContainer = ({ id, children }) => {
         display: 'flex',
         alignItems: 'center',
         py: 8,
-        scrollMarginTop: '64px',
+        scrollMarginTop: '64px', // Offset for fixed header
+        scrollBehavior: 'smooth',
         position: 'relative',
         '&::after': {
           content: '""',
@@ -216,6 +217,7 @@ const SectionContainer = ({ id, children }) => {
         sx={{ 
           opacity: 0,
           transform: 'translateY(50px)',
+          transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',
         }}
       >
         {children}
