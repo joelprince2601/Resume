@@ -319,6 +319,7 @@ function AppContent() {
         sx={{ 
           position: 'relative',
           scrollBehavior: 'smooth',
+          pt: '64px', // Add padding top to account for fixed header
           '& *::-webkit-scrollbar': {
             width: '8px',
           },
