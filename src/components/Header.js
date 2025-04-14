@@ -57,32 +57,27 @@ function Header() {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const headerOffset = 64; // Height of the fixed header
+      const headerOffset = 64;
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = window.scrollY + elementPosition - headerOffset;
-      
-      // Animate scrolling
+      const offsetPosition = window.pageYOffset + elementPosition - headerOffset;
+
+      // Use native smooth scrolling
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+
+      // Update active section and animate content
+      setActiveSection(sectionId);
       anime({
-        targets: [document.documentElement, document.body], // Target both for cross-browser compatibility
-        scrollTop: offsetPosition,
-        duration: 800,
-        easing: 'easeInOutQuad',
-        begin: () => {
-          // Update active section immediately
-          setActiveSection(sectionId);
-          
-          // Animate the section entrance
-          anime({
-            targets: `#${sectionId}-content`,
-            opacity: [0.5, 1],
-            translateY: [20, 0],
-            duration: 600,
-            easing: 'easeOutCubic'
-          });
-        }
+        targets: `#${sectionId}-content`,
+        opacity: [0.5, 1],
+        translateY: [20, 0],
+        duration: 600,
+        easing: 'easeOutCubic'
       });
     }
-    setAnchorEl(null); // Close mobile menu if open
+    setAnchorEl(null);
   };
 
   const handleMenuOpen = (event) => {
