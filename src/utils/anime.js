@@ -9,14 +9,6 @@ export const createTimer = (options) => {
   });
 };
 
-// Basic animation utility
-export const animate = (targets, options) => {
-  return anime({
-    targets,
-    ...options,
-  });
-};
-
 // Timeline utility
 export const createTimeline = (options) => {
   return anime.timeline(options);
@@ -31,7 +23,7 @@ export const createScope = (options) => {
     if (typeof callback === 'string' && fn) {
       methods[callback] = fn;
     } else if (typeof callback === 'function') {
-      callback({ animate, timeline: createTimeline, add });
+      callback({ anime, timeline: createTimeline, add });
     }
     return scope;
   };
@@ -138,12 +130,5 @@ export const createDraggable = (targets, options = {}) => {
   };
 };
 
-export default {
-  animate,
-  createTimer,
-  createTimeline,
-  createScope,
-  stagger,
-  createSpring,
-  createDraggable,
-};
+export { anime };
+export default anime;
