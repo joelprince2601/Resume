@@ -57,30 +57,32 @@ function Header() {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const headerOffset = 64;
+      const headerOffset = 64; // Height of the fixed header
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      const offsetPosition = window.scrollY + elementPosition - headerOffset;
       
       // Animate scrolling
       anime({
-        targets: document.scrollingElement,
+        targets: [document.documentElement, document.body], // Target both for cross-browser compatibility
         scrollTop: offsetPosition,
-        duration: 1000,
-        easing: 'easeInOutQuart',
+        duration: 800,
+        easing: 'easeInOutQuad',
         begin: () => {
+          // Update active section immediately
+          setActiveSection(sectionId);
+          
           // Animate the section entrance
           anime({
-            targets: `#${sectionId} > div`,
-            opacity: [0, 1],
+            targets: `#${sectionId}-content`,
+            opacity: [0.5, 1],
             translateY: [20, 0],
-            duration: 800,
-            easing: 'easeOutCubic',
-            delay: 200
+            duration: 600,
+            easing: 'easeOutCubic'
           });
         }
       });
     }
-    setAnchorEl(null);
+    setAnchorEl(null); // Close mobile menu if open
   };
 
   const handleMenuOpen = (event) => {
