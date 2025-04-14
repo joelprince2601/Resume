@@ -11,7 +11,7 @@ import Contact from './components/Contact';
 import './styles/transitions.css';
 import './styles/animations.css';
 import ParticleBackground from './components/ParticleBackground';
-import anime from './utils/animejs';
+import anime from './utils/anime';
 
 // Animation utilities
 const animate = (targets, options) => {
