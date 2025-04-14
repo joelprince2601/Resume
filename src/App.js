@@ -11,7 +11,7 @@ import Contact from './components/Contact';
 import './styles/transitions.css';
 import './styles/animations.css';
 import ParticleBackground from './components/ParticleBackground';
-import animate from './utils/anime';
+import anime from 'animejs';
 
 // Animation utilities
 const animate = (targets, options) => {
@@ -145,7 +145,7 @@ const theme = createTheme({
 const SectionContainer = ({ id, children }) => {
   useEffect(() => {
     // Initial fade in animation with spring physics
-    animate({
+    anime({
       targets: `#${id}-content`,
       opacity: [0, 1],
       translateY: [50, 0],
@@ -155,12 +155,12 @@ const SectionContainer = ({ id, children }) => {
     });
 
     // Animate child elements with stagger
-    animate({
+    anime({
       targets: `#${id}-content > *`,
       opacity: [0, 1],
       translateY: [20, 0],
       duration: 800,
-      delay: animate.stagger(100, { start: 500 }),
+      delay: anime.stagger(100, { start: 500 }),
       easing: 'easeOutCubic'
     });
 
@@ -168,7 +168,7 @@ const SectionContainer = ({ id, children }) => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          animate({
+          anime({
             targets: entry.target,
             scale: [0.95, 1],
             opacity: [0.5, 1],
@@ -234,7 +234,7 @@ const SectionContainer = ({ id, children }) => {
 function AppContent() {
   useEffect(() => {
     // Animate background grid
-    animate({
+    anime({
       targets: '.background-grid',
       opacity: [0, 0.05],
       scale: [0.9, 1],
@@ -243,7 +243,7 @@ function AppContent() {
     });
 
     // Animate particle background
-    animate({
+    anime({
       targets: '#particle-background',
       opacity: [0, 1],
       duration: 2000,
@@ -252,30 +252,33 @@ function AppContent() {
 
     // Add hover animations for interactive elements
     const papers = document.querySelectorAll('.MuiPaper-root');
-    papers.forEach(paper => {
-      paper.addEventListener('mouseenter', () => {
-        animate({
-          targets: paper,
-          scale: 1.02,
-          duration: 400,
-          easing: 'spring(1, 300, 20, 0)'
-        });
+    const enterAnimation = (paper) => {
+      anime({
+        targets: paper,
+        scale: 1.02,
+        duration: 400,
+        easing: 'spring(1, 300, 20, 0)'
       });
+    };
 
-      paper.addEventListener('mouseleave', () => {
-        animate({
-          targets: paper,
-          scale: 1,
-          duration: 400,
-          easing: 'spring(1, 300, 20, 0)'
-        });
+    const leaveAnimation = (paper) => {
+      anime({
+        targets: paper,
+        scale: 1,
+        duration: 400,
+        easing: 'spring(1, 300, 20, 0)'
       });
+    };
+
+    papers.forEach(paper => {
+      paper.addEventListener('mouseenter', () => enterAnimation(paper));
+      paper.addEventListener('mouseleave', () => leaveAnimation(paper));
     });
 
     return () => {
       papers.forEach(paper => {
-        paper.removeEventListener('mouseenter', () => {});
-        paper.removeEventListener('mouseleave', () => {});
+        paper.removeEventListener('mouseenter', () => enterAnimation(paper));
+        paper.removeEventListener('mouseleave', () => leaveAnimation(paper));
       });
     };
   }, []);
