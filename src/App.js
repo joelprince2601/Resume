@@ -11,11 +11,11 @@ import Contact from './components/Contact';
 import './styles/transitions.css';
 import './styles/animations.css';
 import ParticleBackground from './components/ParticleBackground';
-import anime from './utils/anime.js';
+import animate from './utils/anime';
 
 // Animation utilities
 const animate = (targets, options) => {
-  return anime({
+  return animate({
     targets,
     ...options,
   });
@@ -46,7 +46,7 @@ const createScope = (options) => {
     if (typeof callback === 'string' && fn) {
       methods[callback] = fn;
     } else if (typeof callback === 'function') {
-      callback({ animate, timeline: anime.timeline, add });
+      callback({ animate, timeline: animate.timeline, add });
     }
     return scope;
   };
@@ -144,57 +144,54 @@ const theme = createTheme({
 
 const SectionContainer = ({ id, children }) => {
   useEffect(() => {
-    const scope = createScope({ root: document.querySelector(`#${id}`) });
-
-    scope.add((scope) => {
-      // Initial fade in animation with spring physics
-      animate(`#${id}-content`, {
-        opacity: [0, 1],
-        translateY: [50, 0],
-        duration: 1000,
-        easing: createSpring({ stiffness: 100, damping: 15 }),
-        delay: 300
-      });
-
-      // Animate child elements with stagger
-      animate(`#${id}-content > *`, {
-        opacity: [0, 1],
-        translateY: [20, 0],
-        duration: 800,
-        delay: anime.stagger(100, { start: 500 }),
-        easing: 'easeOutCubic'
-      });
-
-      // Create intersection observer for scroll animations
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            animate(entry.target, {
-              scale: [0.95, 1],
-              opacity: [0.5, 1],
-              duration: 800,
-              easing: createSpring({ stiffness: 200, damping: 20 })
-            });
-          }
-        });
-      }, {
-        threshold: 0.2,
-        rootMargin: '-50px'
-      });
-
-      const content = document.querySelector(`#${id}-content`);
-      if (content) {
-        observer.observe(content);
-      }
-
-      return () => {
-        if (content) {
-          observer.unobserve(content);
-        }
-      };
+    // Initial fade in animation with spring physics
+    animate({
+      targets: `#${id}-content`,
+      opacity: [0, 1],
+      translateY: [50, 0],
+      duration: 1000,
+      easing: 'spring(1, 80, 10, 0)',
+      delay: 300
     });
 
-    return () => scope.revert();
+    // Animate child elements with stagger
+    animate({
+      targets: `#${id}-content > *`,
+      opacity: [0, 1],
+      translateY: [20, 0],
+      duration: 800,
+      delay: animate.stagger(100, { start: 500 }),
+      easing: 'easeOutCubic'
+    });
+
+    // Create intersection observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animate({
+            targets: entry.target,
+            scale: [0.95, 1],
+            opacity: [0.5, 1],
+            duration: 800,
+            easing: 'spring(1, 90, 10, 0)'
+          });
+        }
+      });
+    }, {
+      threshold: 0.2,
+      rootMargin: '-50px'
+    });
+
+    const content = document.querySelector(`#${id}-content`);
+    if (content) {
+      observer.observe(content);
+    }
+
+    return () => {
+      if (content) {
+        observer.unobserve(content);
+      }
+    };
   }, [id]);
 
   return (
@@ -236,34 +233,51 @@ const SectionContainer = ({ id, children }) => {
 
 function AppContent() {
   useEffect(() => {
-    const scope = createScope({ root: document.body });
+    // Animate background grid
+    animate({
+      targets: '.background-grid',
+      opacity: [0, 0.05],
+      scale: [0.9, 1],
+      duration: 1500,
+      easing: 'spring(1, 50, 10, 0)'
+    });
 
-    scope.add((scope) => {
-      // Animate background grid with spring physics
-      animate('.background-grid', {
-        opacity: [0, 0.05],
-        scale: [0.9, 1],
-        duration: 1500,
-        easing: createSpring({ stiffness: 50, damping: 10 })
+    // Animate particle background
+    animate({
+      targets: '#particle-background',
+      opacity: [0, 1],
+      duration: 2000,
+      easing: 'easeOutQuad'
+    });
+
+    // Add hover animations for interactive elements
+    const papers = document.querySelectorAll('.MuiPaper-root');
+    papers.forEach(paper => {
+      paper.addEventListener('mouseenter', () => {
+        animate({
+          targets: paper,
+          scale: 1.02,
+          duration: 400,
+          easing: 'spring(1, 300, 20, 0)'
+        });
       });
 
-      // Animate particle background with smooth fade
-      animate('#particle-background', {
-        opacity: [0, 1],
-        duration: 2000,
-        easing: 'easeOutQuad'
-      });
-
-      // Add hover animations for interactive elements
-      animate('.MuiPaper-root', {
-        scale: [1, 1.02],
-        duration: 400,
-        easing: createSpring({ stiffness: 300, damping: 20 }),
-        autoplay: false
+      paper.addEventListener('mouseleave', () => {
+        animate({
+          targets: paper,
+          scale: 1,
+          duration: 400,
+          easing: 'spring(1, 300, 20, 0)'
+        });
       });
     });
 
-    return () => scope.revert();
+    return () => {
+      papers.forEach(paper => {
+        paper.removeEventListener('mouseenter', () => {});
+        paper.removeEventListener('mouseleave', () => {});
+      });
+    };
   }, []);
 
   return (
