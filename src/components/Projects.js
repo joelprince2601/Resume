@@ -11,7 +11,7 @@ function Projects() {
       title: "MarketAnalyzerX",
       description: "Financial analytics platform offering technical indicators, ML models, and real-time news sentiment for Indian equity markets.",
       tech: ["Python", "Streamlit", "Machine Learning", "Finance APIs"],
-      image: "url_to_market_image",
+      image: "marketanalyzerx.streamlit.app/",
       github: "https://github.com/joelprince2601/MarketAnalyzerX",
       features: [
         "Technical indicators & charting tools",
@@ -95,33 +95,6 @@ function Projects() {
         "Dynamic traffic control",
         "Real-time analytics",
         "Grid overlay system"
-      ]
-    },
-       
-    {
-      title: "Student Database Management",
-      description: "Full-stack application for comprehensive student data management",
-      tech: ["Python", "MySQL", "GUI", "Database"],
-      image: "url_to_database_image",
-      github: "https://github.com/joelprince2601/",
-      features: [
-        "CRUD operations",
-        "Advanced search functionality",
-        "Data visualization",
-        "Secure authentication"
-      ]
-    },
-    {
-      title: "Dino Game Enhanced",
-      description: "Advanced version of Chrome's Dino game with unique gameplay elements",
-      tech: ["Arduino", "Python", "Figma", "Game Dev"],
-      image: "url_to_dino_image",
-      github: "https://github.com/joelprince2601/",
-      features: [
-        "Custom game mechanics",
-        "Hardware integration",
-        "Interactive UI/UX",
-        "Progressive difficulty"
       ]
     },
     {
