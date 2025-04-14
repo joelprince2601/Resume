@@ -1,5 +1,4 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -8,10 +7,38 @@ import Box from '@mui/material/Box';
 //import { Code as CodeIcon } from '@mui/icons-material';
 
 function Header() {
-  const location = useLocation();
+  const [activeSection, setActiveSection] = useState('about');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['about', 'education', 'experience', 'projects', 'skills', 'contact'];
+      const scrollPosition = window.scrollY + 100; // offset for better detection
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Toolbar sx={{ px: { xs: 2, sm: 4 } }}>
         <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
           <Box 
@@ -42,18 +69,17 @@ function Header() {
           }
         }}>
           {[
-            { path: '/', label: 'About' },
-            { path: '/education', label: 'Education' },
-            { path: '/experience', label: 'Experience' },
-            { path: '/projects', label: 'Projects' },
-            { path: '/skills', label: 'Skills' },
-            { path: '/contact', label: 'Contact' }
-          ].map(({ path, label }) => (
+            { id: 'about', label: 'About' },
+            { id: 'education', label: 'Education' },
+            { id: 'experience', label: 'Experience' },
+            { id: 'projects', label: 'Projects' },
+            { id: 'skills', label: 'Skills' },
+            { id: 'contact', label: 'Contact' }
+          ].map(({ id, label }) => (
             <Button
-              key={path}
+              key={id}
               color="inherit"
-              component={Link}
-              to={path}
+              onClick={() => scrollToSection(id)}
               sx={{
                 position: 'relative',
                 '&::after': {
@@ -61,7 +87,7 @@ function Header() {
                   position: 'absolute',
                   bottom: 0,
                   left: '50%',
-                  transform: location.pathname === path ? 'translateX(-50%) scaleX(1)' : 'translateX(-50%) scaleX(0)',
+                  transform: activeSection === id ? 'translateX(-50%) scaleX(1)' : 'translateX(-50%) scaleX(0)',
                   transformOrigin: 'center',
                   width: '80%',
                   height: '2px',
