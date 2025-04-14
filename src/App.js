@@ -1,6 +1,5 @@
 import React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
 import Header from './components/Header';
 import About from './components/About';
@@ -9,7 +8,6 @@ import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
-import PageSlider from './components/PageSlider';
 import './styles/transitions.css';
 import ParticleBackground from './components/ParticleBackground';
 
@@ -79,8 +77,6 @@ const theme = createTheme({
 });
 
 function AppContent() {
-  const location = useLocation();
-
   return (
     <Box sx={{ 
       minHeight: '100vh',
@@ -88,27 +84,35 @@ function AppContent() {
       backgroundImage: 'linear-gradient(rgba(156, 39, 176, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(156, 39, 176, 0.05) 1px, transparent 1px)',
       backgroundSize: '20px 20px',
       backgroundPosition: '-2px -2px',
-      overflow: 'hidden',
       position: 'relative'
     }}>
       <ParticleBackground />
       <Header />
       <Box sx={{ 
-        padding: '40px 20px',
         position: 'relative',
+        overflowY: 'auto',
+        overflowX: 'hidden',
         height: 'calc(100vh - 64px)', // Subtract header height
-        overflow: 'hidden'
+        scrollBehavior: 'smooth'
       }}>
-        <PageSlider>
-          <Routes location={location}>
-            <Route path="/" element={<About />} />
-            <Route path="/education" element={<Education />} />
-            <Route path="/experience" element={<Experience />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/skills" element={<Skills />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </PageSlider>
+        <Box id="about" sx={{ minHeight: '100vh', py: 4 }}>
+          <About />
+        </Box>
+        <Box id="education" sx={{ minHeight: '100vh', py: 4 }}>
+          <Education />
+        </Box>
+        <Box id="experience" sx={{ minHeight: '100vh', py: 4 }}>
+          <Experience />
+        </Box>
+        <Box id="projects" sx={{ minHeight: '100vh', py: 4 }}>
+          <Projects />
+        </Box>
+        <Box id="skills" sx={{ minHeight: '100vh', py: 4 }}>
+          <Skills />
+        </Box>
+        <Box id="contact" sx={{ minHeight: '100vh', py: 4 }}>
+          <Contact />
+        </Box>
       </Box>
     </Box>
   );
@@ -117,9 +121,7 @@ function AppContent() {
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Router>
-        <AppContent />
-      </Router>
+      <AppContent />
     </ThemeProvider>
   );
 }
