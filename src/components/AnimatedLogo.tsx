@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { animate, createScope, createSpring, createDraggable } from '../utils/anime';
+import anime, { createScope, createSpring, createDraggable } from '../utils/anime';
 
 interface AnimatedLogoProps {
   logoSrc: string;
@@ -16,7 +16,8 @@ export default function AnimatedLogo({ logoSrc, alt = "Logo" }: AnimatedLogoProp
 
     scope.current = createScope({ root: root.current }).add((scope: any) => {
       // Create a bounce animation loop
-      animate('.logo', {
+      anime({
+        targets: '.logo',
         scale: [
           { value: 1.25, duration: 200, easing: 'easeInOutCubic' },
           { value: 1, duration: 600, easing: createSpring({ stiffness: 300 }) }
@@ -33,7 +34,8 @@ export default function AnimatedLogo({ logoSrc, alt = "Logo" }: AnimatedLogoProp
 
       // Register function methods to be used outside the useEffect
       scope.add('rotateLogo', (i: number) => {
-        animate('.logo', {
+        anime({
+          targets: '.logo',
           rotate: i * 360,
           easing: 'easeOutQuart',
           duration: 1500,
