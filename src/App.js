@@ -81,12 +81,36 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    h1: {
+      fontSize: 'clamp(2.5rem, 8vw, 4rem)',
+      fontWeight: 600,
+    },
+    h2: {
+      fontSize: 'clamp(2rem, 6vw, 3rem)',
+      fontWeight: 600,
+    },
+    h3: {
+      fontSize: 'clamp(1.75rem, 5vw, 2.5rem)',
+      fontWeight: 600,
+    },
     h4: {
+      fontSize: 'clamp(1.5rem, 4vw, 2rem)',
       fontWeight: 600,
       letterSpacing: '0.02em',
     },
-    h6: {
+    h5: {
+      fontSize: 'clamp(1.25rem, 3vw, 1.5rem)',
       fontWeight: 500,
+    },
+    h6: {
+      fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
+      fontWeight: 500,
+    },
+    body1: {
+      fontSize: 'clamp(1rem, 2vw, 1.125rem)',
+    },
+    body2: {
+      fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
     },
   },
   components: {
@@ -103,6 +127,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           scrollMarginTop: '80px', // Add margin for header offset
+          padding: '0 clamp(1rem, 5vw, 3rem)',
         },
       },
     },
@@ -125,12 +150,22 @@ const theme = createTheme({
         root: {
           borderRadius: 8,
           textTransform: 'none',
-          padding: '8px 16px',
+          padding: '8px clamp(12px, 2vw, 16px)',
+          fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
           '&:hover': {
             backgroundColor: 'rgba(156, 39, 176, 0.08)',
           },
         },
       },
+    },
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1280,
+      xl: 1920,
     },
   },
 });
@@ -192,11 +227,18 @@ const SectionContainer = ({ id, children }) => {
       id={id}
       component="section"
       sx={{
-        minHeight: '100vh',
+        minHeight: {
+          xs: 'calc(100vh - 56px)', // Mobile header height
+          sm: 'calc(100vh - 64px)', // Desktop header height
+        },
         display: 'flex',
         alignItems: 'center',
-        py: 8,
-        scrollMarginTop: '64px', // Offset for fixed header
+        py: { xs: 4, sm: 6, md: 8 },
+        px: { xs: 2, sm: 3, md: 4 },
+        scrollMarginTop: {
+          xs: '56px',
+          sm: '64px',
+        },
         scrollBehavior: 'smooth',
         position: 'relative',
         '&::after': {
@@ -218,6 +260,9 @@ const SectionContainer = ({ id, children }) => {
           opacity: 0,
           transform: 'translateY(50px)',
           transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',
+          width: '100%',
+          mx: 'auto',
+          px: { xs: 2, sm: 3, md: 4 },
         }}
       >
         {children}
