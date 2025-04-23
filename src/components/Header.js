@@ -121,23 +121,30 @@ function Header() {
         zIndex: 1100,
         backdropFilter: 'blur(8px)',
         backgroundColor: 'rgba(26, 26, 26, 0.95)',
+        height: { xs: '56px', sm: '64px' },
       }}
     >
-      <Toolbar sx={{ px: { xs: 2, sm: 4 } }}>
+      <Toolbar 
+        sx={{ 
+          px: { xs: 2, sm: 3, md: 4 },
+          minHeight: { xs: '56px', sm: '64px' },
+          justifyContent: 'space-between',
+        }}
+      >
         <Box sx={{ 
           display: 'flex', 
           alignItems: 'center', 
-          flexGrow: 1,
           cursor: 'pointer',
+          flex: { xs: 1, md: 'unset' },
         }}
         onClick={() => scrollToSection('about')}
         >
           <Box 
             component="span" 
             sx={{ 
-              mr: 2, 
+              mr: { xs: 1, sm: 2 },
               color: '#9c27b0',
-              fontSize: '24px',
+              fontSize: { xs: '20px', sm: '24px' },
               fontWeight: 'bold',
               transition: 'transform 0.3s ease',
               '&:hover': {
@@ -147,16 +154,21 @@ function Header() {
           >
             &lt;/&gt;
           </Box>
-          <Typography variant="h6" component="div" sx={{ 
-            fontWeight: 600,
-            background: 'linear-gradient(45deg, #9c27b0 30%, #f50057 90%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            transition: 'opacity 0.3s ease',
-            '&:hover': {
-              opacity: 0.8,
-            }
-          }}>
+          <Typography 
+            variant="h6" 
+            component="div" 
+            sx={{ 
+              fontWeight: 600,
+              fontSize: { xs: '1.125rem', sm: '1.25rem' },
+              background: 'linear-gradient(45deg, #9c27b0 30%, #f50057 90%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              transition: 'opacity 0.3s ease',
+              '&:hover': {
+                opacity: 0.8,
+              }
+            }}
+          >
             Joel Prince
           </Typography>
         </Box>
@@ -168,6 +180,7 @@ function Header() {
               aria-label="menu"
               onClick={handleMenuOpen}
               sx={{
+                ml: 2,
                 '&:hover': {
                   backgroundColor: 'rgba(156, 39, 176, 0.08)',
                 }
@@ -183,7 +196,17 @@ function Header() {
                 sx: {
                   backgroundColor: 'rgba(26, 26, 26, 0.95)',
                   backdropFilter: 'blur(8px)',
+                  mt: '8px',
+                  minWidth: '200px',
                 }
+              }}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
               }}
               TransitionProps={{
                 onEnter: (node) => {
@@ -204,6 +227,8 @@ function Header() {
                   sx={{
                     color: activeSection === id ? '#9c27b0' : 'inherit',
                     transition: 'color 0.3s ease',
+                    py: 1.5,
+                    px: 3,
                   }}
                 >
                   {label}
@@ -214,9 +239,10 @@ function Header() {
         ) : (
           <Box sx={{ 
             display: 'flex', 
-            gap: { xs: 1, sm: 2 },
+            gap: { sm: 1, md: 2 },
             '& .MuiButton-root': {
-              minWidth: { sm: '100px' },
+              minWidth: { sm: '80px', md: '100px' },
+              px: { sm: 1.5, md: 2 },
             }
           }}>
             {navigationItems.map(({ id, label }) => (
@@ -229,6 +255,7 @@ function Header() {
                   position: 'relative',
                   transition: 'color 0.3s ease',
                   color: activeSection === id ? '#9c27b0' : 'inherit',
+                  fontSize: { sm: '0.875rem', md: '1rem' },
                   '&::after': {
                     content: '""',
                     position: 'absolute',
