@@ -9,6 +9,19 @@ function Experience() {
 
   const professionalExp = [
     {
+      role: "ML Engineer Intern",
+      company: "Quetzalcoatl Pvt Ltd",
+      period: "February 2025 – Present",
+      description: "Building AI solutions for stock market analysis and trading optimization",
+      skills: ["Python", "Web Scraping", "LLMs", "AI Agent", "Machine Learning"],
+      achievements: [
+        "Built an AI agent and trained LLM for real-time stock market analysis",
+        "Scraped live financial data to train models for market prediction",
+        "Focused on trading strategy optimization and decision-making enhancement"
+      ],
+      icon: <BusinessIcon sx={{ fontSize: 40 }} />
+    },
+    {
       role: "R&D Intern",
       company: "Stradegi Solutions India",
       period: "June 2024 – July 2024",
@@ -20,22 +33,9 @@ function Experience() {
         "Implemented database optimizations"
       ],
       icon: <BusinessIcon sx={{ fontSize: 40 }} />
-    };
-    {
-      role: "ML Engineer Intern",
-      company: "Quetzalcoatl Pvt Ltd",
-      period: "February 2025 – Present",
-      description: "Built AI agents and trained LLMs for real-time stock market analysis",
-      skills: ["Python", "Web Scraping", "LLMs", "AI Agent"],
-      achievements: [
-        "Developed and deployed AI agents for live stock market analysis",
-        "Scraped and processed real-time financial data for predictive modeling",
-        "Optimized trading strategies to enhance decision-making efficiency"
-      ],
-      icon: <BusinessIcon sx={{ fontSize: 40 }} />
     }
-
   ];
+
 
   const virtualExp = [
     {
