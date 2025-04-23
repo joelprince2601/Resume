@@ -20,7 +20,7 @@ function Experience() {
         "Implemented database optimizations"
       ],
       icon: <BusinessIcon sx={{ fontSize: 40 }} />
-    }
+    };
     {
       role: "ML Engineer Intern",
       company: "Quetzalcoatl Pvt Ltd",
