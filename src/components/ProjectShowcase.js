@@ -43,8 +43,9 @@ function ProjectShowcase() {
       status: 'Live',
       metrics: {
         accuracy: '94%',
-        users: '1.2K+',
         uptime: '99.9%'
+        latency: '<50ms',
+
       },
       features: [
         'Real-time OCR chart analysis',
