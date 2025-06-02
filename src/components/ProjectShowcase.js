@@ -43,7 +43,7 @@ function ProjectShowcase() {
       status: 'Live',
       metrics: {
         accuracy: '94%',
-        uptime: '99.9%'
+        uptime: '99.9%',
         latency: '<50ms',
 
       },
