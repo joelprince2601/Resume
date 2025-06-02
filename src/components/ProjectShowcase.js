@@ -44,7 +44,7 @@ function ProjectShowcase() {
       metrics: {
         accuracy: '94%',
         uptime: '99.9%',
-        latency: '<50ms',
+        latency: '<50ms'
 
       },
       features: [
